@@ -1,7 +1,22 @@
-# Tauri + Vanilla TS
+# Useless Aeehmmm-Counter
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+![Alt text](/preview.png 'Preview Screenshot')
 
-## Recommended IDE Setup
+## Why?
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+I was bored
+
+## Features
+
+- point counter
+- combo point multiplier
+- simple editing of the fields per HTML
+- Selection synchronization
+- Text animations
+
+## TODO
+
+- Save data as cookie
+- Click animation
+- Combo animation
+- profiles
