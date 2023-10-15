@@ -8,6 +8,7 @@ body {
   align-items: center;
   justify-items: center;
   flex-wrap: wrap;
+  margin: 0;
 }
 
 .ring-menu {

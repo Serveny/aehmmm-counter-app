@@ -29,13 +29,13 @@ export class Combo {
     this.addCountDown();
   }
 
-  progressDown(toSub: number) {
+  progressDown(toSub: number): boolean {
     this.percent -= toSub;
     if (this.percent < 0) this.percent = 0;
     this.bonusMulti = Math.floor(this.percent / 25) + 1;
     this.setComboRow();
     this.setComboBar();
-    if (this.percent === 0 && this.countDown) clearInterval(this.countDown);
+    return this.percent !== 0;
   }
   setComboRow() {
     if (this.comboCount)
@@ -51,10 +51,12 @@ export class Combo {
 
   addCountDown() {
     if (this.countDown == null) {
-      this.countDown = setInterval(
-        () => this.progressDown(0.2 * this.bonusMulti),
-        400
-      );
+      this.countDown = setTimeout(() => {
+        this.countDown = null;
+        if (this.progressDown(0.2 * this.bonusMulti)) {
+          this.addCountDown();
+        }
+      }, 400);
     }
   }
 }

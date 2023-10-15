@@ -9,7 +9,7 @@ export function elByIdOrErr(id: string): HTMLElement {
 }
 
 export function sortItemCounts(itemCounts: ItemCount[]) {
-  itemCounts.sort((a, b) => (a.itemCount < b.itemCount ? 1 : 0));
+  itemCounts.sort((a, b) => (a.itemCount < b.itemCount ? 1 : -1));
   for (const [i, ic] of itemCounts.entries()) {
     ic.setOrder(i);
     ic.setBar();
