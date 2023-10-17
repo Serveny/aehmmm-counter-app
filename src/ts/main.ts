@@ -4,11 +4,13 @@ import { ItemCount } from './item-count';
 import { Combo } from './combo';
 import { Counter } from './counter';
 import { throwErr } from './utils';
+import { Store } from './store';
 
 const counter = new Counter(0, 0, [], new Combo(0, 0));
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   const menuEl = document.getElementsByClassName('ring-menu')[0] as HTMLElement;
+  counter.store = await Store.open();
   initRingMenu(menuEl);
   addPointsCounter(menuEl);
   addComboEl(menuEl);

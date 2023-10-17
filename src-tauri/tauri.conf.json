@@ -7,7 +7,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "aehmmm-counter-app",
+    "productName": "Ähmm Counter",
     "version": "0.0.0"
   },
   "tauri": {
