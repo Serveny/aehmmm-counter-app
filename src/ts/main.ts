@@ -2,15 +2,16 @@
 import { initRingMenu } from './ring-menu';
 import { ItemCount } from './item-count';
 import { Combo } from './combo';
-import { Counter } from './counter';
 import { throwErr } from './utils';
+import { Profile, ProfilesSelect } from './profile';
 import { Store } from './store';
 
-const counter = new Counter(0, 0, [], new Combo(0, 0));
+const counter = new Profile('default', 0, 0, [], new Combo(0, 0));
 
 window.addEventListener('load', async () => {
+  const profiles = Store.loadProfileNames();
+  document.body.appendChild(new ProfilesSelect(profiles).el);
   const menuEl = document.getElementsByClassName('ring-menu')[0] as HTMLElement;
-  counter.store = await Store.open();
   initRingMenu(menuEl);
   addPointsCounter(menuEl);
   addComboEl(menuEl);

@@ -1,30 +1,31 @@
-import { Counter } from './counter';
+import { Profile } from './profile';
 import { elByIdOrErr, sortItemCounts, throwErr } from './utils';
 
-export class ItemCount {
+export interface IItemCountSave {
   pointsUp: number;
   itemCount: number;
-  pointsEl: HTMLElement;
-  countEl: HTMLElement;
-  itemCountRow: HTMLElement;
-  itemCountEl: HTMLElement;
-  itemPointsBar: HTMLElement;
+}
+
+export class ItemCount implements IItemCountSave {
+  pointsUp: number;
+  itemCount: number;
+  pointsEl = elByIdOrErr('points');
+  countEl = elByIdOrErr('count');
+  itemCountRow = document.createElement('p');
+  itemCountEl = document.createElement('span');
+  itemPointsBar = document.createElement('div');
   constructor(
     private menuItemEl: HTMLElement,
     itemPointsCon: HTMLElement,
-    private counter: Counter
+    private counter: Profile
   ) {
     this.pointsUp = parseInt(
       this.menuItemEl.getAttribute('data-points') ??
         throwErr('data-points doesnt exist')
     );
     this.itemCount = 0;
-    this.pointsEl = elByIdOrErr('points');
-    this.countEl = elByIdOrErr('count');
 
-    this.itemCountRow = document.createElement('p');
     this.itemCountRow.classList.add('item-points-row');
-    this.itemCountEl = document.createElement('span');
     this.itemCountEl.innerText = '0';
     this.itemCountRow.innerText = `${
       (this.menuItemEl.children[0] as HTMLElement).innerText
@@ -32,7 +33,6 @@ export class ItemCount {
     this.itemCountRow.appendChild(this.itemCountEl);
     itemPointsCon.append(this.itemCountRow);
 
-    this.itemPointsBar = document.createElement('div');
     this.itemPointsBar.classList.add('bar');
     this.itemCountRow.append(this.itemPointsBar);
 

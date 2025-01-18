@@ -63,3 +63,34 @@ body {
   background-color: rgba(226, 122, 48, 0.259);
   transition: width 0.8s;
 }
+
+.profiles-select-box {
+  position: absolute;
+  left: 10vh;
+  top: 10vh;
+  translate: -50% -50%;
+
+  :is(button) {
+    cursor: pointer;
+    display: block;
+    border: 1px solid #e27b30;
+    border-radius: 50%;
+    margin: 0;
+    padding: 5vh;
+    background-color: #262626;
+    background-image: url('../assets/plus.svg');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    transition: all 0.5s;
+  }
+
+  :is(button):hover {
+    zoom: 120%;
+    background-color: #e27a3042;
+  }
+
+  & > select {
+    display: none;
+  }
+}

@@ -1,3 +1,5 @@
+import { IProfileSave } from './profile';
+
 export enum Table {
   Combo,
   ItemCounts,
@@ -5,18 +7,39 @@ export enum Table {
 
 export class Store {
   static dbName = 'aehmmm-counter';
+  static combo = 'combo';
+  static itemCount = 'itemCount';
 
-  constructor(private db: IDBDatabase) {}
+  constructor(public profile: string) {}
 
-  public static async open(): Promise<Store> {
-    return new Promise((resolve, reject) => {
-      const DBOpenRequest = window.indexedDB.open(Store.dbName, 4);
-      DBOpenRequest.onerror = (event) => reject('Error opening db: ' + event);
-      DBOpenRequest.onsuccess = () => resolve(new Store(DBOpenRequest.result));
-    });
+  private name(): string {
+    return Store.dbName + this.profile;
   }
 
-  private objStore(table: Table) {
-    return this.db.transaction(Store.dbName).objectStore(table.toString());
+  save(counter: IProfileSave) {
+    window.localStorage.setItem(this.name(), JSON.stringify(counter));
+  }
+
+  load(): IProfileSave | null {
+    const data = window.localStorage.getItem(this.name());
+    if (data) {
+      return JSON.parse(data);
+    }
+    return null;
+  }
+
+  public static saveProfileNames(profiles: string) {
+    window.localStorage.setItem(
+      Store.dbName + '-profiles',
+      JSON.stringify(profiles)
+    );
+  }
+
+  public static loadProfileNames(): string[] {
+    const profiles = window.localStorage.getItem(Store.dbName + '-profiles');
+    if (profiles) {
+      return JSON.parse(profiles);
+    }
+    return [];
   }
 }

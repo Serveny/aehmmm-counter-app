@@ -1,4 +1,8 @@
-export class Combo {
+export interface IComboSave {
+  percent: number;
+  bonusMulti: number;
+}
+export class Combo implements IComboSave {
   private countDown: number | null = null;
   private comboCount?: HTMLElement;
   private comboBar?: HTMLElement;
